@@ -52,7 +52,7 @@ start_time = time.time() #开始时间
 #模拟打开B站 获取cookies
 print('登录中..............')
 driver.get("https://www.bilibili.com")
-cookies_path = os.path.join(".",'app','bilibili','cookies.json')
+cookies_path = os.path.join(".",'app','main','cookies.json')
 try:
     #尝试读取cookies数据文件
     with open(cookies_path,mode='r',encoding='utf-8') as c:

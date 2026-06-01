@@ -1,3 +1,0 @@
-#This File is for store your cookies
-#这个文件是用来存放你的cookies信息的 避免每次爬取都要登录操作
-#在main程序中执行bilibili_selenium.py 登录成功后会自动存储cookies信息于此
