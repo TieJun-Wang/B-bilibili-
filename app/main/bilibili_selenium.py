@@ -10,7 +10,7 @@ import json
 import re
 import os
 #==================================UID & url部分===============================
-UID = 'Input user_uid there'
+UID = 'input_uid here'
 url = f"https://space.bilibili.com/{UID}/upload/video"   #获取关注数 粉丝数 点赞量 播放量
 #=================================创建文件目录==================================
 data_dir_path = os.path.join('.','app','data','raw',f'UID_{UID}')
@@ -57,7 +57,7 @@ try:
     #尝试读取cookies数据文件
     with open(cookies_path,mode='r',encoding='utf-8') as c:
         cookies_list = json.load(c)
-    #将cookies带入driver
+    #将cookies带入driver -----如果文件是空的或者被损坏或者过期会报错然后进行登录操作
     for item in cookies_list:
         driver.add_cookie(item)
     #标记存在cookies数据
@@ -70,20 +70,20 @@ if not cookies_flag:  #进行模拟登录操作
     #等待成功登录----设置了60s内登录
     driver.set_window_position(0,0)
     try:
-        flag = wait_login.until(
+        wait_login.until(
             EC.invisibility_of_element_located(
-                (By.XPATH,'//*[@id="app"]//div[@class="bili-header__bar"]//ul[@class="right-entry"]//div[@class="header-login-entry')
+                (By.XPATH,'//*[@id="app"]//div[@class="bili-header__bar"]//ul[@class="right-entry"]//div[@class="header-login-entry"]')
             )
-        )
+        )  #这里是根据登录之后该元素会消失来写
     except:
-        print('登录超时请稍后重试')
+        raise TimeoutError('登录超时请稍后重试')
 
     #储存cookies
     cookies_list = driver.get_cookies()
     with open(cookies_path,mode='w',encoding='utf-8') as c:
         json.dump(cookies_list,c)
+    print('登录成功,已保存对应Cookies信息以便下次操作')
 
-print('登陆成功')
 driver.set_window_position(700, 0)
 #关闭图片渲染加速爬取------放在这里是为了登录时候二维码能读取稳定
 driver.options.add_argument("--blink-settings=imagesEnabled=false")   
