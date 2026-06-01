@@ -62,8 +62,8 @@ df_video = fetch_data(uid,data_type2)
 if not isinstance(df_basic,pd.DataFrame) or not isinstance(df_video,pd.DataFrame):
     raise FileNotFoundError(f'没有UID:{uid}所对应的信息,请先去爬取该用户数据')
 #获取数据文件创建时间
-basic_data_path = os.path.join('.','user_data',f'UID_{uid}','basic_data.json')
-video_data_path = os.path.join('.','user_data',f'UID_{uid}','video_data.json')
+basic_data_path = os.path.join('.','app','data','raw',f'UID_{uid}','basic_data.json')
+video_data_path = os.path.join('.','app','data','raw',f'UID_{uid}','video_data.json')
 basic_ctime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getctime(basic_data_path))) if os.path.exists(basic_data_path) else '未知'
 video_ctime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getctime(video_data_path))) if os.path.exists(video_data_path) else '未知' 
 #====================================分析数据处理======================================
