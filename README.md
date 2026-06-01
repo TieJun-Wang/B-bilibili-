@@ -40,7 +40,8 @@ bilibili-crawler/
 ├── app/
 │   ├── main/
 │   │   ├── bilibili_selenium.py     # 爬虫主程序
-│   │   └── data_analyze.py          # 数据分析 + 画图
+│   │   ├── data_analyze.py          # 数据分析 + 画图
+│   │   └── cookies.json             # 登录态缓存
 │   └── data/
 │       ├── raw/                     # 爬取后的原始 JSON
 │       │   └── bilibili/
@@ -51,7 +52,6 @@ bilibili-crawler/
 │                   ├── video_data_stats.xlsx
 │                   ├── analysis_report.md
 │                   └── charts/      # 7 张 PNG 图表
-└── cookies.json                     # 登录态缓存
 ```
 
 ---
