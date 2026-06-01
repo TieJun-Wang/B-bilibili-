@@ -61,7 +61,7 @@ bilibili-crawler/
 1. 打开 `app/main/bilibili_selenium.py`，修改第 13 行：
 
 ```python
-UID = '39279965'   # 替换为目标 UP 主的 UID
+UID = 'input_uid here'   # 替换为目标 UP 主的 UID
 ```
 
 2. 运行脚本：
@@ -71,7 +71,6 @@ python app/main/bilibili_selenium.py
 ```
 
 3. 浏览器自动打开 B 站首页，扫码或账号密码登录。登录成功后自动跳转目标主页，开始分页抓取。
-4. 终端会提示输入爬取范围（比如第 1 到第 50 个视频），按需填入。
 5. 爬取完成后数据保存至 `app/data/raw/bilibili/UID_xxx/`。
 
 ### 第二步：生成报告

@@ -71,8 +71,8 @@ if not cookies_flag:  #进行模拟登录操作
     driver.set_window_position(0,0)
     try:
         flag = wait_login.until(
-            EC.presence_of_element_located(
-                (By.XPATH,'div[@class="header-avatar-wrap--container mini-avatar--small"]')
+            EC.invisibility_of_element_located(
+                (By.XPATH,'//*[@id="app"]//div[@class="bili-header__bar"]//ul[@class="right-entry"]//div[@class="header-login-entry')
             )
         )
     except:
@@ -86,7 +86,7 @@ if not cookies_flag:  #进行模拟登录操作
 print('登陆成功')
 driver.set_window_position(700, 0)
 #关闭图片渲染加速爬取------放在这里是为了登录时候二维码能读取稳定
-options.add_argument("--blink-settings=imagesEnabled=false")   
+driver.options.add_argument("--blink-settings=imagesEnabled=false")   
 
 #===================================basic_data=========================================
 driver.refresh()
@@ -194,29 +194,8 @@ while True:
 video_data_json = []     #用于存放各个视频的数据
 num_all_video = len(video_href_list)
 print(f'一共抓取到{num_all_video}个视频,即将进行数据爬取')
-#输入爬取视频的范围
-print(f'请输入要爬取的视频范围1~{num_all_video}(数字越小视频越新)')
-print('起始点和终止点一样即爬取一个视频')
-#视频链接重复判断
-if len(set(video_href_list)) != num_all_video:
-    raise ValueError('出现异常现象,有重复链接出现,请稍后再试')
-while True:
-    try:
-        begin = int(input('请输入起始点:'))
-        end = int(input('请输入终止点:')) 
-        if begin<=0 or end<=0:
-            raise ValueError('请输入正整数!!!')
-        if begin>num_all_video or end>num_all_video:
-            raise ValueError(f'输入值请不要大于{num_all_video}')
-        if begin>end:
-            raise ValueError('起始点要比终止点小')
-        break
-    except Exception as e:
-        print(str(e))
-        continue
-
 error_time = 0 #用于记录失败条数
-for idx,href in enumerate(video_href_list[begin-1:end],start=begin):
+for idx,href in enumerate(video_href_list,start=1):
     try:
         print(f'爬取第{idx}个视频数据中..........')
         #进入单个视频进行数据爬取
@@ -324,12 +303,11 @@ if video_data_json: #有数据 再说明
         json.dump(video_data_json,f,ensure_ascii=False,indent=4)
     #保存成功输出路径地址
     print(f'视频数据保存成功,路径为:{video_data_path}')
-    num_video_scape = end-begin+1
     num_video_success = len(video_data_json)
     print(f'成功爬取视频数据数:{num_video_success}')
     if error_time!=0:
         print(f'爬取失败视频数:{error_time}')
-        print(f'爬取成功率:{num_video_success/len(range(begin,end+1))*100:.2f}%')
+        print(f'爬取成功率:{num_video_success/num_all_video*100:.2f}%')
     else:
         print(f'爬取成功率:100.00%')
 else:
