@@ -43,15 +43,13 @@ bilibili-crawler/
 │   │   ├── data_analyze.py          # 数据分析 + 画图
 │   │   └── cookies.json             # 登录态缓存
 │   └── data/
-│       ├── raw/                     # 爬取后的原始 JSON
-│       │   └── bilibili/
-│       │       └── UID_39279965/    # 示例：影石Insta360
-│       └── output/                  # 分析产出
-│           └── bilibili/
-│               └── UID_39279965/
-│                   ├── video_data_stats.xlsx
-│                   ├── analysis_report.md
-│                   └── charts/      # 7 张 PNG 图表
+│       ├── raw/
+│       │   └── UID_39279965/        # 示例：影石Insta360
+│       └── output/
+│           └── UID_39279965/
+│               ├── video_data_stats.xlsx
+│               ├── analysis_report.md
+│               └── charts/          # 7 张 PNG 图表
 ```
 
 ---

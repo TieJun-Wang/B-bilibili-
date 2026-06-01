@@ -13,7 +13,7 @@ import os
 UID = 'Input user_uid there'
 url = f"https://space.bilibili.com/{UID}/upload/video"   #获取关注数 粉丝数 点赞量 播放量
 #=================================创建文件目录==================================
-data_dir_path = os.path.join('.','app','data','raw','bilibili','',f'UID_{UID}')
+data_dir_path = os.path.join('.','app','data','raw',f'UID_{UID}')
 os.makedirs(data_dir_path,exist_ok=True)
 #=================================浏览器配置部分===============================
 options = webdriver.EdgeOptions()

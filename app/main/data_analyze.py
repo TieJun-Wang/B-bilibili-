@@ -23,7 +23,7 @@ def fetch_data(uid:str,data_type:str): # --> return a dataframe
     allowed = {'video','basic'}
     if data_type not in allowed:
         raise ValueError('Please input correct data_type(basic or video)')
-    data_path = os.path.join('.','app','data','raw','bilibili',f'UID_{uid}',f'{data_type}_data.json')
+    data_path = os.path.join('.','app','data','raw',f'UID_{uid}',f'{data_type}_data.json')
     try:
         with open(data_path,mode='r',encoding='utf-8') as f:
             data = pd.read_json(f)
@@ -51,7 +51,7 @@ def fetch_data(uid:str,data_type:str): # --> return a dataframe
 #读取数据
 uid = input('请输入要分析的UP主UID: ').strip()
 start_time = time.time()
-data_dir = os.path.join('.','app','data','raw','bilibili',f'UID_{uid}')
+data_dir = os.path.join('.','app','data','raw',f'UID_{uid}')
 if not os.path.isdir(data_dir):
     raise FileNotFoundError(f'没有UID:{uid}对应的信息,请先去爬取该用户数据')
 data_type1 = 'basic'
@@ -69,8 +69,8 @@ video_ctime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.path.getctime
 #====================================分析数据处理======================================
 row_num = df_video.shape[0]
 axis_num = df_video.shape[1]
-stats_file_path = os.path.join('.','app','data','output','bilibili',f'UID_{uid}','video_data_stats.xlsx')
-charts_dir = os.path.join('.','app','data','output','bilibili',f'UID_{uid}','charts')
+stats_file_path = os.path.join('.','app','data','output',f'UID_{uid}','video_data_stats.xlsx')
+charts_dir = os.path.join('.','app','data','output',f'UID_{uid}','charts')
 os.makedirs(charts_dir,exist_ok=True)
 
 # 设置中文字体 & 符号兼容
@@ -366,7 +366,7 @@ for _, row in top_coin.iterrows():
     print(f'  [{row["投币率"]:.2%}] {row["标题"]}')
 
 #=====================================写入Markdown报告===================================
-md_path = os.path.join('.','app','data','output','bilibili',f'UID_{uid}','analysis_report.md')
+md_path = os.path.join('.','app','data','output',f'UID_{uid}','analysis_report.md')
 with open(md_path, 'w', encoding='utf-8') as md:
     md.write(f'# UID:{uid} 数据分析报告\n\n')
     md.write(f"**数据获取日期**:{video_ctime}\n")
